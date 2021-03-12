@@ -1,4 +1,4 @@
 # HEALTH-DETECTOR
 exam project of Internet of Things and 3D Intelligent Systems
 
-Introduzione nel file .pdf
+Introduzione nel file intro_def.pdf
