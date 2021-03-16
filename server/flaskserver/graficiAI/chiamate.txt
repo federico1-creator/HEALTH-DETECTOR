@@ -1,0 +1,8 @@
+# TODO funzioni da chiamare in users/routes.py per eseguire grafici e AI
+
+devo ri-chiamare le funzioni in flaskserver/users/routes.py per costruire i grafici nelle pagine html
+
+!!! devo passare user_id per fare i grafici con bokeh rispetto al paziente (graf.py)
+    e anche per analisi dati sullo storico del paziente (AI.py)
+
+con le predizioni creo immagini '.png' e valori
