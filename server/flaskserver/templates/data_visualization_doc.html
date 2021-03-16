@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+
+
+    <script src="http://cdn.bokeh.org/bokeh/release/bokeh-0.9.0.min.js"></script>
+
+
+
+    {% if title %}
+    <title>Health Detector - {{ title }}</title>
+    {% else %}
+    <title>Health Detector</title>
+    {% endif %}
+</head>
+<body>
+<header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+            <a class="navbar-brand mr-4" href="/">Health Detector</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="{{ url_for('main.home')}}">Home</a>
+                    <a class="nav-item nav-link" href="{{url_for('main.about')}}">About</a>
+                </div>
+                <!-- Navbar Right Side -->
+                <div class="navbar-nav">
+                    {% if current_user.is_authenticated %}
+                    {% if current_user.role >= 255 %}
+                    <a class="nav-item nav-link" href="{{url_for('posts.new_post')}}">New Post</a>
+                    {%endif%}
+                    <a class="nav-item nav-link" href="{{url_for('users.account')}}">Account</a>
+                    <a class="nav-item nav-link" href="{{url_for('users.logout')}}">Logout</a>
+                    {% if current_user.role == 511%}
+                    <a class="nav-item nav-link" href="{{url_for('doctors.admin_page')}}">Register a Doctor</a>
+                    {%endif%}
+                    {%else%}
+                    <a class="nav-item nav-link" href="{{url_for('users.login')}}">Login</a>
+                    <a class="nav-item nav-link" href="{{url_for('users.register')}}">Register</a>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-15">
+            {%with messages = get_flashed_messages(with_categories=true)%}
+            {% if messages%}
+            {% for category, message in messages %}
+               <div class="alert alert-{{ category }}">
+                   {{ message }}
+               </div>
+            {%endfor%}
+            {%endif%}
+            {% endwith %}
+            {%block content%}
+        <div class="col-md-15">
+            <div class="content-section">
+                <h3>Dati Paziente {{user.cognome}} {{user.nome}}</h3>
+                <ul class="list-group">
+                <table class="table">
+                    <tr><th scope="col">Data</th><th scope="col">Temperatura</td><th scope="col">Battito</td><th scope="col">Saturazione</td><th scope="col">Stato di salute</td><th scope="col">Cambia Stato Salute</td></tr>
+                     {%for item in data.items%}
+                    <tr><td>{{item.date}}</td><td>{{item.temp}}</td><td>{{item.BPM}}</td><td>{{item.sat}}</td><td> {{salute[item.health]}}</td><td>
+
+                        <form method="POST" action="" enctype="multipart/form-data">
+        {{form.hidden_tag()}}
+        <fieldset class="form-group">
+               <div class="form-group">
+                  {{ form.data.label(class="form-control-label") }}
+                  {{form.data(class="form-control-lg")}}
+              </div>
+        <div class="form-group">
+            {{form.submit(class="btn btn-outline-info")}}
+        </div>
+            <input type="hidden" name="code" value="{{ item.id }}"/>
+       </form>
+                    </td></tr>
+                {%endfor%}
+                    </table>
+
+                </ul>
+
+            </div>
+        </div>
+
+{% for page_num in data.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2)%}
+{% if page_num%}
+{%if data.page == page_num%}
+<a class="btn btn-info mb-4" href="{{url_for('doctors.data_table',id=user.id, page=page_num)}}">{{ page_num }}</a>
+{%else%}
+<a class="btn btn-outline-info mb-4" href="{{url_for('doctors.data_table', id= user.id ,page=page_num)}}">{{ page_num }}</a>
+{%endif%}
+{%else%}
+...
+{%endif%}
+{%endfor%}
+{% endblock content%}
+
+</main>
+
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>

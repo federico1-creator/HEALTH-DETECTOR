@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content%}
+<div class="content-section">
+  <div class="media">
+    <img class="rounded-circle account-img" src={{ image_file}}>
+    <div class="media-body">
+      <h2 class="account-heading">{{user.cognome.capitalize()}} {{user.nome.capitalize()}}</h2>
+      <p class="text-secondary">{{user.email}}</p>
+    </div>
+  </div>
+  <div class="content-session">
+       <legend class="border-bottom mb-4">Account info</legend>
+       <div class="media">
+
+           <div class="media-body">
+               {% for value in user.to_list():%}
+
+                   {%if value.capitalize() != "Role"%}
+             <p class="text">{{value.capitalize()}} : {{user.__getattribute__(value)}}</p>
+               {%else%}
+                 <p class="text">{{value.capitalize()}} : Patient</p>
+               {%endif%}
+               {%endfor%}
+
+               </div>
+             </div>
+</div>
+</div>
+{% endblock content%}
+{% block side %}
+        <div class="col-md-4">
+            <div class="content-section">
+                <h3>Attività</h3>
+                <p class='text-muted'>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-light">
+                        <a href="/data{{user.id}}">Visualizza Grafico</a> </li>
+                <li class="list-group-item list-group-item-light">
+                        <a href="/data_table{{user.id}}">Visualizza dati paziente</a> </li>
+                </ul>
+                </p>
+            </div>
+        </div>
+{%endblock%}

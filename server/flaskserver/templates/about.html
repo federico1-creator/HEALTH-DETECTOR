@@ -1,0 +1,44 @@
+{%extends "layout.html"%}
+{% block content %}
+<h1> About page</h1>
+<p> Presentazione del applicazione</p>
+
+
+<p style="text-align: justify"> COVID-19 DETECTOR rileva a distanza la salute del paziente durante un periodo di tempo prolungato. Raccoglie e analizza i suoi principali dati medici come: temperatura corporea, saturazione dell’ossigeno nel sangue, battito cardiaco e geolocalizzazione del paziente al fine di predire/controllare la malattia COVID-19.
+
+I dati sono raccolti attraverso sensori collegati ad ARDUINO presenti all’interno di ogni dispositivo consegnato ad ogni paziente.  I dati rilevati sono destinati al paziente, ma anche al suo medico curante che può analizzarli ed agire (prescrizione cure, coinvolgimento USCA, ricovero in ospedale, … ).
+
+I dati sono a disposizione anche della AUSL di riferimento che li utilizza per una gestione della malattia a livello territoriale.
+
+Attraverso l’utilizzo di un server, il sistema rende possibile anche l’elaborazione e la visualizzazione dei dati con un’interfaccia web a disposizione sia del paziente sia del medico. Il medico individua ed assegno lo stato di salute ai vari pazienti. Conoscendo tale stato il sistema crea un database annotato dei vari pazienti.
+
+In questo periodo di emergenza sanitaria la medicina sul territorio è di centrale importanza e questo dispositivo va in quella direzione.
+
+Il sistema progettato oltre a rendere disponibile una banca dati con i parametri di salute dei pazienti permette anche di evitare possibili contagi dovuti dalle visite. Infatti, si può utilizzare una comunicazione diretta e a distanza tra il paziente ed il medico.
+
+Questo servizio può essere esteso in modo scalabile, consegnando i dispositivi alla cittadinanza costruendo così la rete di pazienti monitorati.
+
+Una volta acquisiti i vari dati dai pazienti è stata implementata la possibilità di allenare algoritmi di machine learning che permettono di prevedere lo stato di salute nei giorni successivi. Questo è l’ambito più innovativo trattato e può portare ad individuare precocemente l’insorgere della malattia sulla base dei dati rilevati e richiamare l’attenzione del medico curante che poi potrà scegliere il miglior trattamento per il suo paziente.
+
+</p>
+
+
+
+<p style="text-align: justify"> In conclusione, vi sono vari ambiti di interesse in questo progetto, tra i principali: la creazione di un database annotato rispetto allo stato di salute del paziente; l’analisi attraverso grafici e la predizione dell’evoluzione dello stato di salute del paziente, con la possibilità di basarsi su una grande quantità di dati annotati per l’allenamento del modello di predizione; l’implementazione di un sistema flessibile (aggiunta di sensori) e scalabile (espandibile ad un numero elevato di pazienti).
+
+</p>
+{% endblock%}
+{% block side %}
+        <div class="col-md-4">
+            <div class="content-section">
+                <h3>Attività</h3>
+                <p class='text-muted'>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-light">
+                        <a href="{{url_for('main.home')}}">Vai alla Home</a> </li>
+                    <li class="list-group-item list-group-item-light"><a href="{{url_for('main.who')}}">Chi siamo?</a></li>
+                </ul>
+                </p>
+            </div>
+        </div>
+{%endblock%}

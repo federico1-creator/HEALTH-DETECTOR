@@ -1,0 +1,29 @@
+{%extends "layout.html"%}
+{% block content %}
+<h1>Chi siamo?</h1>
+<p style="text-align: justify">Siamo due studenti della laurea magistrale in Ingegneria Informatica con specializzazione in Intelligenza Artificiale presso l’UNIMORE. Il progetto COVID-19 DETECTOR è stato sviluppato durante il corso IOT and 3D Intelligent Systems  </p>
+
+
+
+<div class="media">
+    <img class="account-img" src="\static\profile_pics\Agazzotti_R.png">Riccardo Agazzotti
+</div>
+
+<div class="media">
+    <img class="account-img" src="\static\profile_pics\F_Cocchi.jpg">Federico Cocchi
+</div>
+
+{% endblock%}
+{% block side %}
+        <div class="col-md-4">
+            <div class="content-section">
+                <h3>Attività</h3>
+                <p class='text-muted'>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-light">
+                        <a href="{{url_for('main.home')}}">Vai alla Home</a> </li>
+                </ul>
+                </p>
+            </div>
+        </div>
+{%endblock%}

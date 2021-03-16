@@ -1,0 +1,42 @@
+{%extends "layout.html"%}
+{% block content %}
+<h1> Dott. {{current_user.cognome.capitalize()}}</h1>
+<p>Lista pazienti</p>
+
+
+<article class="media content-section">
+    <div class="media-body">
+        {% for user in users.items %}
+        <li class="list-group-item list-group-item-light">
+                        <a href="/paziente_{{user.id}}"> {{user.nome}} {{user.cognome}} {{user.cf}}</a>
+             <a align="align-right" href="/mypost/{{user.id}}">Attvità paziente</a></li>
+{%endfor%}
+    </div>
+</article>
+
+{% for page_num in users.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2)%}
+{% if page_num%}
+{%if users.page == page_num%}
+<a class="btn btn-info mb-4" href="{{url_for('main.home', page=page_num)}}">{{ page_num }}</a>
+{%else%}
+<a class="btn btn-outline-info mb-4" href="{{url_for('main.home', page=page_num)}}">{{ page_num }}</a>
+{%endif%}
+{%else%}
+...
+{%endif%}
+{%endfor%}
+{% endblock%}
+{% block side %}
+        <div class="col-md-4">
+            <div class="content-section">
+                <h3>Attività</h3>
+                <p class='text-muted'>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-light">
+                        <a href="{{url_for('doctors.view_post')}}">Situazione pazienti</a> </li>
+                    <li class="list-group-item list-group-item-light"><a href="{{url_for('doctors.map')}}">Maps</a></li>
+                </ul>
+                </p>
+            </div>
+        </div>
+{%endblock%}
