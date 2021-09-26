@@ -50,4 +50,3 @@ Quindi tramite stampa si possono realizzare i case che poi conterranno il sistem
 Progetto realizzato da:
 - Cocchi federico
 - Agazzotti Riccardo
-- 
