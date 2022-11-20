@@ -1,6 +1,6 @@
 # Progetto IoT & 3D: HEALTH DETECTOR
 ## Exam project of Internet of Things and 3D Intelligent Systems
-### Remote patient health monitoring system with reference to key vital parameters used to monitor and predict pandemic COVID-19.
+### Remote patient health monitoring system with reference to key vital parameters used to monitor and predict pandemic of COVID-19.
 
 
 ![](/images/oggetto.jpg)
